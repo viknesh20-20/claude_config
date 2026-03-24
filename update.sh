@@ -12,7 +12,7 @@ CONFIG_DIR="$(cd "$(dirname "$0")" && pwd)"
 echo ""
 echo "╔══════════════════════════════════════════════════════╗"
 echo "║     Claude Code Config — Update                     ║"
-echo "║     30 skills · 8 agents · 9 rules · 2 hooks       ║"
+echo "║   30 skills · 8 agents · 9 rules · 30 MCP · 2 hooks   ║"
 echo "╚══════════════════════════════════════════════════════╝"
 echo ""
 

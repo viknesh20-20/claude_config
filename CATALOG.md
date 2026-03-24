@@ -114,11 +114,84 @@ Rules auto-load into every Claude Code session. No manual invocation needed.
 
 ---
 
-## MCP Servers (4)
+## MCP Servers (30)
 
+### Core (zero config)
 | Server | Purpose | Required Setup |
 |--------|---------|---------------|
 | `fetch` | HTTP requests | None |
 | `filesystem` | Scoped file access | None |
-| `github` | PR, issue, repo operations | Set `GITHUB_PERSONAL_ACCESS_TOKEN` |
 | `memory` | Persistent knowledge store | None |
+| `sequential-thinking` | Structured multi-step reasoning | None |
+| `context7` | Up-to-date library documentation | None |
+
+### Code & Semantic Editing
+| Server | Purpose | Required Setup |
+|--------|---------|---------------|
+| `serena` | Semantic code retrieval & symbol-level editing | Requires `uvx` (Python) |
+
+### Frontend & Design
+| Server | Purpose | Required Setup |
+|--------|---------|---------------|
+| `figma` | Design-to-code, pull variables/components/layout | Set `FIGMA_ACCESS_TOKEN` |
+
+### Browser Automation & Web Scraping
+| Server | Purpose | Required Setup |
+|--------|---------|---------------|
+| `playwright` | Full browser automation & testing | None |
+| `puppeteer` | Headless Chrome control | None |
+| `firecrawl` | Web scraping, crawling, structured extraction | Set `FIRECRAWL_API_KEY` |
+
+### Search & Research
+| Server | Purpose | Required Setup |
+|--------|---------|---------------|
+| `brave-search` | Web search | Set `BRAVE_API_KEY` |
+| `perplexity` | AI-powered research with citations | Set `PERPLEXITY_API_KEY` |
+
+### Version Control & Code Platforms
+| Server | Purpose | Required Setup |
+|--------|---------|---------------|
+| `github` | PR, issue, repo operations | Set `GITHUB_PERSONAL_ACCESS_TOKEN` |
+| `gitlab` | Merge requests, issues, CI pipelines | Set `GITLAB_PERSONAL_ACCESS_TOKEN`, `GITLAB_API_URL` |
+
+### Databases
+| Server | Purpose | Required Setup |
+|--------|---------|---------------|
+| `postgres` | PostgreSQL operations | Set `POSTGRES_CONNECTION_STRING` |
+| `sqlite` | SQLite operations | None |
+| `redis` | Redis cache & data store | Set `REDIS_URL` |
+| `mongodb` | MongoDB queries & Atlas management | Set `MONGODB_URI` |
+| `supabase` | Supabase Postgres, auth, edge functions | Set `SUPABASE_URL`, `SUPABASE_API_KEY` |
+
+### Infrastructure & Deployment
+| Server | Purpose | Required Setup |
+|--------|---------|---------------|
+| `kubernetes` | K8s cluster management, pods, Helm | Uses local kubeconfig |
+| `cloudflare` | DNS, Workers, R2, Zero Trust | Set `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` |
+
+### Payments & Commerce
+| Server | Purpose | Required Setup |
+|--------|---------|---------------|
+| `stripe` | Payments, subscriptions, customers | Set `STRIPE_SECRET_KEY` |
+
+### Communication
+| Server | Purpose | Required Setup |
+|--------|---------|---------------|
+| `slack` | Team messaging & channels | Set `SLACK_BOT_TOKEN`, `SLACK_TEAM_ID` |
+| `twilio` | SMS, voice, communications | Set `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN` |
+
+### Project Management
+| Server | Purpose | Required Setup |
+|--------|---------|---------------|
+| `notion` | Knowledge base & docs | Set `NOTION_TOKEN` |
+| `linear` | Issue tracking & sprint management | Set `LINEAR_API_KEY` |
+
+### Monitoring & Error Tracking
+| Server | Purpose | Required Setup |
+|--------|---------|---------------|
+| `sentry` | Error tracking & monitoring | Set `SENTRY_ACCESS_TOKEN` |
+
+### AI & ML
+| Server | Purpose | Required Setup |
+|--------|---------|---------------|
+| `huggingface` | Models, datasets, Spaces, papers | Set `HF_TOKEN` |

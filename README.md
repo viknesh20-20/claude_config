@@ -2,12 +2,12 @@
 
 ### The ultimate Claude Code configuration — production-ready, stack-agnostic, endlessly upgradable.
 
-**30 skills, 8 agents, 9 rules, safety hooks, and 4 MCP servers** — everything you need to supercharge Claude Code in any project, any language, any framework.
+**30 skills, 8 agents, 9 rules, safety hooks, and 30 MCP servers** — everything you need to supercharge Claude Code in any project, any language, any framework.
 
 [![Skills](https://img.shields.io/badge/skills-30-blue?style=flat-square)](CATALOG.md)
 [![Agents](https://img.shields.io/badge/agents-8-purple?style=flat-square)](CATALOG.md)
 [![Rules](https://img.shields.io/badge/rules-9-green?style=flat-square)](CATALOG.md)
-[![MCP Servers](https://img.shields.io/badge/MCP_servers-4-orange?style=flat-square)](.mcp.json)
+[![MCP Servers](https://img.shields.io/badge/MCP_servers-30-orange?style=flat-square)](.mcp.json)
 [![Stack](https://img.shields.io/badge/stack-agnostic-brightgreen?style=flat-square)](#design-philosophy)
 [![Platform](https://img.shields.io/badge/platform-win%20%7C%20mac%20%7C%20linux-lightgrey?style=flat-square)](#quick-start)
 [![License](https://img.shields.io/badge/license-MIT-yellow?style=flat-square)](LICENSE)
@@ -22,7 +22,7 @@ Every time you start a Claude Code session, it starts from zero — no memory of
 - **8 specialized agents** that Claude can delegate complex tasks to (architecture, TDD, security auditing, mentoring)
 - **9 auto-loading rule files** that enforce coding standards without you having to repeat yourself
 - **Safety hooks** that block dangerous operations before they execute
-- **4 MCP servers** for web fetching, file access, GitHub integration, and persistent memory
+- **30 MCP servers** for web fetching, browser automation, design (Figma), code editing (Serena), GitHub/GitLab, databases, Slack, Stripe, Kubernetes, Cloudflare, AI/ML, and more
 
 All of it is **stack-agnostic** — skills auto-detect your project's language, framework, and tools at runtime.
 
@@ -35,7 +35,7 @@ All of it is **stack-agnostic** — skills auto-detect your project's language, 
 - [Skills (30)](#skills-30)
 - [Agents (8)](#agents-8)
 - [Rules (9)](#rules-9)
-- [MCP Servers (4)](#mcp-servers-4)
+- [MCP Servers (30)](#mcp-servers-30)
 - [Hooks (2)](#hooks-2)
 - [Customization](#customization)
 - [Adding Your Own](#adding-your-own)
@@ -50,28 +50,42 @@ All of it is **stack-agnostic** — skills auto-detect your project's language, 
 
 ## Quick Start
 
-### Option A: Clone and wire into any project
+### Option A: Interactive install (recommended)
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/claude-config.git ~/claude-config
 
-# Wire into a project
-bash ~/claude-config/setup.sh /path/to/your/project
+# Interactive installer — walks you through API keys & secrets
+bash ~/claude-config/install.sh /path/to/your/project
 
 # Start Claude Code — everything is ready
 cd /path/to/your/project && claude
 ```
 
-### Option B: Use as a Git submodule
+The interactive installer:
+- Installs all skills, agents, rules, hooks, and MCP servers
+- Walks you through each MCP server's API keys/secrets one by one
+- Lets you **skip** any service you don't use
+- Saves secrets to `.env.local` (gitignored) or your shell profile
+- Shows a summary of configured vs skipped services
+
+### Option B: Quick install (no prompts)
+
+```bash
+# Copies everything with no secret configuration
+bash ~/claude-config/setup.sh /path/to/your/project
+```
+
+### Option C: Use as a Git submodule
 
 ```bash
 cd your-project
 git submodule add https://github.com/YOUR_USERNAME/claude-config.git claude-config
-bash claude-config/setup.sh .
+bash claude-config/install.sh .
 git add . && git commit -m "chore: add claude-config"
 ```
 
-### Option C: Cherry-pick what you need
+### Option D: Cherry-pick what you need
 
 Copy individual skill/agent/rule files into your project's `.claude/` directory.
 
@@ -84,11 +98,12 @@ After setup, **customize `CLAUDE.md`** with your project's stack, commands, and 
 ```
 claude-config/
 ├── CLAUDE.md                       # Universal project instructions (<100 lines)
-├── .mcp.json                       # 4 MCP servers (fetch, filesystem, github, memory)
+├── .mcp.json                       # 30 MCP servers (Figma, Serena, Playwright, Stripe, K8s, etc.)
 ├── LICENSE                         # MIT
 ├── CONTRIBUTING.md                 # How to contribute
 ├── CATALOG.md                      # Full index of everything
-├── setup.sh                        # Cross-platform project wiring
+├── install.sh                      # Interactive installer with secret config
+├── setup.sh                        # Quick setup (no prompts)
 ├── update.sh                       # Pull latest config
 │
 └── .claude/
@@ -259,27 +274,89 @@ Rules live in `.claude/rules/` and require no manual invocation — they are alw
 
 ---
 
-## MCP Servers (4)
+## MCP Servers (30)
 
-| Server | Purpose | Setup Required |
-|--------|---------|---------------|
-| **fetch** | Make HTTP requests from Claude | None |
-| **filesystem** | Scoped file read/write | None |
-| **github** | PR reviews, issues, repo operations | Set `GITHUB_PERSONAL_ACCESS_TOKEN` |
-| **memory** | Persistent knowledge across sessions | None |
+30 pre-configured MCP servers across 12 categories. Servers using `${ENV_VAR}` references are safe to keep in `.mcp.json` — they resolve at runtime. Set vars in your shell profile or `.env.local`.
 
-Add project-specific servers by editing `.mcp.json` in your project:
+### Core (zero config)
+| Server | Purpose |
+|--------|---------|
+| **fetch** | Make HTTP requests from Claude |
+| **filesystem** | Scoped file read/write access |
+| **memory** | Persistent knowledge across sessions |
+| **sequential-thinking** | Structured multi-step reasoning for complex problems |
+| **context7** | Up-to-date library documentation (replaces stale training data) |
 
-```json
-{
-  "mcpServers": {
-    "postgres": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-postgres", "${DATABASE_URL}"]
-    }
-  }
-}
-```
+### Code & Semantic Editing
+| Server | Purpose | Setup |
+|--------|---------|-------|
+| **serena** | Semantic code retrieval, symbol-level editing, multi-language support | Requires `uvx` (Python) |
+
+### Frontend & Design
+| Server | Purpose | Env Vars |
+|--------|---------|----------|
+| **figma** | Design-to-code — pull variables, components, layout from Figma | `FIGMA_ACCESS_TOKEN` |
+
+### Browser Automation & Web Scraping
+| Server | Purpose | Env Vars |
+|--------|---------|----------|
+| **playwright** | Full browser automation — testing, screenshots, form filling | None |
+| **puppeteer** | Headless Chrome control | None |
+| **firecrawl** | Web scraping, crawling, structured data extraction | `FIRECRAWL_API_KEY` |
+
+### Search & Research
+| Server | Purpose | Env Vars |
+|--------|---------|----------|
+| **brave-search** | Web search | `BRAVE_API_KEY` |
+| **perplexity** | AI-powered research with citations (Sonar models) | `PERPLEXITY_API_KEY` |
+
+### Version Control & Code Platforms
+| Server | Purpose | Env Vars |
+|--------|---------|----------|
+| **github** | PR reviews, issues, repo operations | `GITHUB_PERSONAL_ACCESS_TOKEN` |
+| **gitlab** | Merge requests, issues, CI pipelines | `GITLAB_PERSONAL_ACCESS_TOKEN`, `GITLAB_API_URL` |
+
+### Databases
+| Server | Purpose | Env Vars |
+|--------|---------|----------|
+| **postgres** | PostgreSQL operations | `POSTGRES_CONNECTION_STRING` |
+| **sqlite** | SQLite operations | None |
+| **redis** | Redis cache & data store | `REDIS_URL` |
+| **mongodb** | MongoDB queries & Atlas cluster management | `MONGODB_URI` |
+| **supabase** | Supabase Postgres, auth, edge functions | `SUPABASE_URL`, `SUPABASE_API_KEY` |
+
+### Infrastructure & Deployment
+| Server | Purpose | Env Vars |
+|--------|---------|----------|
+| **kubernetes** | K8s cluster management, pods, Helm charts | Uses local kubeconfig |
+| **cloudflare** | DNS, Workers, R2, Zero Trust (2,500+ API endpoints) | `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` |
+
+### Payments & Commerce
+| Server | Purpose | Env Vars |
+|--------|---------|----------|
+| **stripe** | Payments, subscriptions, customers | `STRIPE_SECRET_KEY` |
+
+### Communication
+| Server | Purpose | Env Vars |
+|--------|---------|----------|
+| **slack** | Team messaging & channel operations | `SLACK_BOT_TOKEN`, `SLACK_TEAM_ID` |
+| **twilio** | SMS, voice, communications | `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN` |
+
+### Project Management
+| Server | Purpose | Env Vars |
+|--------|---------|----------|
+| **notion** | Knowledge base & documentation | `NOTION_TOKEN` |
+| **linear** | Issue tracking & sprint management | `LINEAR_API_KEY` |
+
+### Monitoring & Error Tracking
+| Server | Purpose | Env Vars |
+|--------|---------|----------|
+| **sentry** | Error tracking & crash monitoring | `SENTRY_ACCESS_TOKEN` |
+
+### AI & ML
+| Server | Purpose | Env Vars |
+|--------|---------|----------|
+| **huggingface** | Models, datasets, Spaces, papers from HF Hub | `HF_TOKEN` |
 
 ---
 
@@ -418,6 +495,7 @@ bash claude-config/setup.sh .
 | Rules not loading | Verify `.claude/rules/*.md` exists and has content |
 | MCP server connection fails | Check `npx` is in PATH (install Node.js 18+) |
 | GitHub MCP 401 error | Set `GITHUB_PERSONAL_ACCESS_TOKEN` env var |
+| MCP server "env var not set" | Re-run `install.sh` or set vars manually in `.env.local` / shell profile |
 | Hook not triggering | Run `chmod +x .claude/hooks/*.sh` |
 | setup.sh fails on Windows | Use Git Bash (installed with Git for Windows) |
 | Submodule files missing | Run `git submodule update --init --recursive` |
