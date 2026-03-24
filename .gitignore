@@ -1,0 +1,35 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Secrets — NEVER commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+
+# Claude Code local state (per-user, not shared)
+*.local.md
+*.local.json
+.claude/projects/
+.claude/statsig/
+.claude/telemetry/
+.claude/stats-cache.json
+.claude/history.jsonl
+.claude/todos/
+
+# Node (if setup scripts pull deps)
+node_modules/
+
+# Logs
+*.log
