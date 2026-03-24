@@ -2,9 +2,9 @@
 set -euo pipefail
 
 # ============================================================================
-# Claude Code Config — Setup Script
+# Claude Code Toolkit — Setup Script
 # Wires this config into a target project directory.
-# Usage: bash claude-config/setup.sh [target-project-path]
+# Usage: bash claude-code-toolkit/setup.sh [target-project-path]
 # Works on: Linux, macOS, Windows (Git Bash / MSYS2 / WSL)
 # ============================================================================
 
@@ -14,7 +14,7 @@ TARGET="$(cd "$TARGET" && pwd)"
 
 echo ""
 echo "╔══════════════════════════════════════════════════════╗"
-echo "║     Claude Code Config — Setup                      ║"
+echo "║     Claude Code Toolkit — Setup                      ║"
 echo "║   30 skills · 8 agents · 9 rules · 30 MCP · 2 hooks   ║"
 echo "╚══════════════════════════════════════════════════════╝"
 echo ""

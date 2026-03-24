@@ -1,6 +1,6 @@
-# Claude Code Config
+# Claude Code Toolkit
 
-### The ultimate Claude Code configuration — production-ready, stack-agnostic, endlessly upgradable.
+### The ultimate Claude Code configuration — 30 skills, 30 MCP servers, 8 agents, 9 rules, safety hooks. Production-ready, stack-agnostic, endlessly upgradable.
 
 **30 skills, 8 agents, 9 rules, safety hooks, and 30 MCP servers** — everything you need to supercharge Claude Code in any project, any language, any framework.
 
@@ -53,10 +53,10 @@ All of it is **stack-agnostic** — skills auto-detect your project's language, 
 ### Option A: Interactive install (recommended)
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/claude-config.git ~/claude-config
+git clone https://github.com/YOUR_USERNAME/claude-code-toolkit.git ~/claude-code-toolkit
 
 # Interactive installer — walks you through API keys & secrets
-bash ~/claude-config/install.sh /path/to/your/project
+bash ~/claude-code-toolkit/install.sh /path/to/your/project
 
 # Start Claude Code — everything is ready
 cd /path/to/your/project && claude
@@ -73,16 +73,16 @@ The interactive installer:
 
 ```bash
 # Copies everything with no secret configuration
-bash ~/claude-config/setup.sh /path/to/your/project
+bash ~/claude-code-toolkit/setup.sh /path/to/your/project
 ```
 
 ### Option C: Use as a Git submodule
 
 ```bash
 cd your-project
-git submodule add https://github.com/YOUR_USERNAME/claude-config.git claude-config
-bash claude-config/install.sh .
-git add . && git commit -m "chore: add claude-config"
+git submodule add https://github.com/YOUR_USERNAME/claude-code-toolkit.git claude-code-toolkit
+bash claude-code-toolkit/install.sh .
+git add . && git commit -m "chore: add claude-code-toolkit"
 ```
 
 ### Option D: Cherry-pick what you need
@@ -96,7 +96,7 @@ After setup, **customize `CLAUDE.md`** with your project's stack, commands, and 
 ## What's Included
 
 ```
-claude-config/
+claude-code-toolkit/
 ├── CLAUDE.md                       # Universal project instructions (<100 lines)
 ├── .mcp.json                       # 30 MCP servers (Figma, Serena, Playwright, Stripe, K8s, etc.)
 ├── LICENSE                         # MIT
@@ -399,7 +399,7 @@ Currently a passthrough. Uncomment sections to enable auto-linting, audit loggin
 
 ```bash
 # Copy the shared skill to project level
-cp -r claude-config/.claude/skills/review-pr .claude/skills/review-pr
+cp -r claude-code-toolkit/.claude/skills/review-pr .claude/skills/review-pr
 # Edit .claude/skills/review-pr/SKILL.md with your customizations
 # Project-level skills take precedence
 ```
@@ -438,14 +438,14 @@ mkdir -p .claude/skills/my-skill
 
 ### Standalone clone
 ```bash
-cd ~/claude-config && git pull origin main
-bash ~/claude-config/setup.sh /path/to/your/project
+cd ~/claude-code-toolkit && git pull origin main
+bash ~/claude-code-toolkit/setup.sh /path/to/your/project
 ```
 
 ### Git submodule
 ```bash
-bash claude-config/update.sh
-git add claude-config && git commit -m "chore: update claude-config"
+bash claude-code-toolkit/update.sh
+git add claude-code-toolkit && git commit -m "chore: update claude-code-toolkit"
 ```
 
 New skills, agents, and rules are added automatically. Your project-level customizations are never overwritten.
@@ -456,18 +456,18 @@ New skills, agents, and rules are added automatically. Your project-level custom
 
 ```bash
 # Add to project
-git submodule add https://github.com/YOUR_USERNAME/claude-config.git claude-config
-bash claude-config/setup.sh .
-git add .gitmodules claude-config .claude/ CLAUDE.md .mcp.json .gitignore
-git commit -m "chore: add claude-config submodule"
+git submodule add https://github.com/YOUR_USERNAME/claude-code-toolkit.git claude-code-toolkit
+bash claude-code-toolkit/setup.sh .
+git add .gitmodules claude-code-toolkit .claude/ CLAUDE.md .mcp.json .gitignore
+git commit -m "chore: add claude-code-toolkit submodule"
 
 # Clone a project that uses it
 git clone --recurse-submodules https://github.com/YOUR_USERNAME/your-project.git
-bash claude-config/setup.sh .
+bash claude-code-toolkit/setup.sh .
 
 # Forgot --recurse-submodules?
 git submodule update --init --recursive
-bash claude-config/setup.sh .
+bash claude-code-toolkit/setup.sh .
 ```
 
 ---

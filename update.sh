@@ -2,16 +2,16 @@
 set -euo pipefail
 
 # ============================================================================
-# Claude Code Config — Update Script
+# Claude Code Toolkit — Update Script
 # Pulls the latest config from the remote repository.
-# Usage: bash claude-config/update.sh
+# Usage: bash claude-code-toolkit/update.sh
 # ============================================================================
 
 CONFIG_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo ""
 echo "╔══════════════════════════════════════════════════════╗"
-echo "║     Claude Code Config — Update                     ║"
+echo "║     Claude Code Toolkit — Update                     ║"
 echo "║   30 skills · 8 agents · 9 rules · 30 MCP · 2 hooks   ║"
 echo "╚══════════════════════════════════════════════════════╝"
 echo ""
@@ -34,5 +34,5 @@ echo "    1. Re-run setup.sh on your projects to sync new skills/agents/rules:"
 echo "       bash $CONFIG_DIR/setup.sh /path/to/your/project"
 echo ""
 echo "    2. If using as a git submodule, commit the pointer update:"
-echo "       git add claude-config && git commit -m 'chore: update claude-config'"
+echo "       git add claude-code-toolkit && git commit -m 'chore: update claude-code-toolkit'"
 echo ""

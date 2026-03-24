@@ -2,9 +2,9 @@
 set -euo pipefail
 
 # ============================================================================
-# Claude Code Config — Interactive Installer
+# Claude Code Toolkit — Interactive Installer
 # Full setup with optional API key/secret configuration per MCP server.
-# Usage: bash claude-config/install.sh [target-project-path]
+# Usage: bash claude-code-toolkit/install.sh [target-project-path]
 # Works on: Linux, macOS, Windows (Git Bash / MSYS2 / WSL)
 # ============================================================================
 
@@ -35,7 +35,7 @@ skip_msg() { echo -e "  ${DIM}[=] SKIP: $1${RESET}"; }
 # ---------- Banner ----------
 echo ""
 echo -e "${BOLD}╔══════════════════════════════════════════════════════════╗${RESET}"
-echo -e "${BOLD}║       Claude Code Config — Interactive Installer        ║${RESET}"
+echo -e "${BOLD}║       Claude Code Toolkit — Interactive Installer        ║${RESET}"
 echo -e "${BOLD}║   30 skills · 8 agents · 9 rules · 30 MCP · 2 hooks    ║${RESET}"
 echo -e "${BOLD}╚══════════════════════════════════════════════════════════╝${RESET}"
 echo ""
