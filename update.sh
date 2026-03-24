@@ -10,9 +10,10 @@ set -euo pipefail
 CONFIG_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo ""
-echo "╔══════════════════════════════════════════╗"
-echo "║     Claude Code Config — Update          ║"
-echo "╚══════════════════════════════════════════╝"
+echo "╔══════════════════════════════════════════════════════╗"
+echo "║     Claude Code Config — Update                     ║"
+echo "║     30 skills · 8 agents · 9 rules · 2 hooks       ║"
+echo "╚══════════════════════════════════════════════════════╝"
 echo ""
 
 # Pull latest if this is a git repo
@@ -29,7 +30,7 @@ fi
 
 echo ""
 echo "  Next steps:"
-echo "    1. Re-run setup.sh on your projects to sync new skills:"
+echo "    1. Re-run setup.sh on your projects to sync new skills/agents/rules:"
 echo "       bash $CONFIG_DIR/setup.sh /path/to/your/project"
 echo ""
 echo "    2. If using as a git submodule, commit the pointer update:"

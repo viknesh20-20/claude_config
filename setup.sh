@@ -13,9 +13,10 @@ TARGET="${1:-.}"
 TARGET="$(cd "$TARGET" && pwd)"
 
 echo ""
-echo "╔══════════════════════════════════════════╗"
-echo "║     Claude Code Config — Setup           ║"
-echo "╚══════════════════════════════════════════╝"
+echo "╔══════════════════════════════════════════════════════╗"
+echo "║     Claude Code Config — Setup                      ║"
+echo "║     30 skills · 8 agents · 9 rules · 2 hooks       ║"
+echo "╚══════════════════════════════════════════════════════╝"
 echo ""
 echo "  Config source : $CONFIG_DIR"
 echo "  Target project: $TARGET"
@@ -39,30 +40,77 @@ if [[ "${OSTYPE:-}" == "msys" || "${OSTYPE:-}" == "cygwin" || "${OSTYPE:-}" == "
   IS_WINDOWS=true
 fi
 
+install_dir() {
+  local SRC_DIR="$1"
+  local DST_DIR="$2"
+  local LABEL="$3"
+
+  if [ -d "$SRC_DIR" ]; then
+    for ITEM in "$SRC_DIR"/*/; do
+      [ -d "$ITEM" ] || continue
+      local NAME=$(basename "$ITEM")
+      local DST="$DST_DIR/$NAME"
+
+      if [ -d "$DST" ] || [ -L "$DST" ]; then
+        skip "$LABEL: $NAME"
+      else
+        if $IS_WINDOWS; then
+          cp -r "$ITEM" "$DST"
+        else
+          ln -s "$ITEM" "$DST"
+        fi
+        action "Installed $LABEL: $NAME"
+      fi
+    done
+  fi
+}
+
+install_files() {
+  local SRC_DIR="$1"
+  local DST_DIR="$2"
+  local LABEL="$3"
+  local EXT="${4:-md}"
+
+  if [ -d "$SRC_DIR" ]; then
+    for ITEM in "$SRC_DIR"/*."$EXT"; do
+      [ -f "$ITEM" ] || continue
+      local NAME=$(basename "$ITEM")
+      local DST="$DST_DIR/$NAME"
+
+      if [ -f "$DST" ] || [ -L "$DST" ]; then
+        skip "$LABEL: $NAME"
+      else
+        if $IS_WINDOWS; then
+          cp "$ITEM" "$DST"
+        else
+          ln -s "$ITEM" "$DST"
+        fi
+        action "Installed $LABEL: $NAME"
+      fi
+    done
+  fi
+}
+
 # ---------- Create directory structure ----------
 mkdir -p "$TARGET/.claude/skills"
 mkdir -p "$TARGET/.claude/hooks"
+mkdir -p "$TARGET/.claude/agents"
+mkdir -p "$TARGET/.claude/rules"
 
-# ---------- Copy or symlink skills ----------
-if [ -d "$CONFIG_DIR/.claude/skills" ]; then
-  for SKILL_DIR in "$CONFIG_DIR/.claude/skills"/*/; do
-    SKILL_NAME=$(basename "$SKILL_DIR")
-    TARGET_SKILL="$TARGET/.claude/skills/$SKILL_NAME"
+# ---------- Install skills (30 skill directories) ----------
+echo "  Installing skills..."
+install_dir "$CONFIG_DIR/.claude/skills" "$TARGET/.claude/skills" "skill"
 
-    if [ -d "$TARGET_SKILL" ] || [ -L "$TARGET_SKILL" ]; then
-      skip "skill: $SKILL_NAME"
-    else
-      if $IS_WINDOWS; then
-        cp -r "$SKILL_DIR" "$TARGET_SKILL"
-      else
-        ln -s "$SKILL_DIR" "$TARGET_SKILL"
-      fi
-      action "Installed skill: /$SKILL_NAME"
-    fi
-  done
-fi
+# ---------- Install agents (8 agent files) ----------
+echo "  Installing agents..."
+install_files "$CONFIG_DIR/.claude/agents" "$TARGET/.claude/agents" "agent" "md"
 
-# ---------- Copy or symlink hooks ----------
+# ---------- Install rules (9 rule files) ----------
+echo "  Installing rules..."
+install_files "$CONFIG_DIR/.claude/rules" "$TARGET/.claude/rules" "rule" "md"
+
+# ---------- Install hooks ----------
+echo "  Installing hooks..."
 if [ -d "$CONFIG_DIR/.claude/hooks" ]; then
   for HOOK_FILE in "$CONFIG_DIR/.claude/hooks"/*.sh; do
     [ -f "$HOOK_FILE" ] || continue
@@ -109,26 +157,13 @@ if [ ! -f "$TARGET/CLAUDE.md" ]; then
 # Project Instructions
 
 > Customize this file with your project-specific configuration.
-> The shared Claude Code config provides universal standards.
-> This file adds project-specific context.
+> Universal rules auto-load from .claude/rules/.
 
 ## Stack
-<!-- Define your stack:
-- Language:
-- Framework:
-- Database:
-- Test runner:
-- Package manager:
--->
+<!-- Language, framework, database, test runner, package manager -->
 
 ## Build & Dev Commands
-<!-- Define your commands:
-- Dev server:
-- Build:
-- Test:
-- Lint:
-- Type check:
--->
+<!-- dev server, build, test, lint, type check -->
 
 ## Architecture
 <!-- Brief description of project architecture -->
@@ -171,21 +206,34 @@ fi
 
 # ---------- Summary ----------
 echo ""
-echo "──────────────────────────────────────────"
+echo "══════════════════════════════════════════════════════"
 echo "  Setup complete! ${#ACTIONS[@]} actions taken."
-echo "──────────────────────────────────────────"
+echo "══════════════════════════════════════════════════════"
+echo ""
+echo "  What was installed:"
+echo "    - 30 skills     (type / in Claude Code to see them)"
+echo "    - 8 agents      (specialized autonomous agents)"
+echo "    - 9 rules       (auto-loaded coding standards)"
+echo "    - 2 hooks       (safety gate + post-execution)"
+echo "    - 4 MCP servers (fetch, filesystem, github, memory)"
 echo ""
 echo "  Next steps:"
 echo "    1. Edit CLAUDE.md with your project-specific details"
 echo "    2. Edit .mcp.json to add project-specific MCP servers"
-echo "    3. Create CLAUDE.local.md for personal notes (gitignored)"
-echo "    4. Run 'claude' to start a session with all 20 skills"
+echo "    3. Set GITHUB_PERSONAL_ACCESS_TOKEN for GitHub MCP"
+echo "    4. Create CLAUDE.local.md for personal notes (gitignored)"
+echo "    5. Run 'claude' to start a session"
 echo ""
-echo "  Available skills:"
-echo "    /review-pr    /write-tests    /optimize       /security-scan"
-echo "    /refactor     /explain-code   /fix-issue      /estimate"
-echo "    /changelog    /architecture-review  /api-design"
-echo "    /create-component  /deploy-checklist  /db-migration"
-echo "    /dependency-audit  /git-cleanup  /generate-docs"
-echo "    /code-coverage     /debug        /convert-code"
+echo "  Skill categories:"
+echo "    Code Quality : /review-pr /refactor /explain-code"
+echo "    Testing      : /write-tests /code-coverage /tdd"
+echo "    Security     : /security-scan /dependency-audit"
+echo "    Performance  : /optimize"
+echo "    Architecture : /architecture-review /api-design /create-component"
+echo "    DevOps       : /deploy-checklist /db-migration /git-cleanup"
+echo "                   /ci-pipeline /docker-setup /env-setup"
+echo "    Project Mgmt : /fix-issue /estimate /changelog /pr-summary"
+echo "    Utilities    : /generate-docs /debug /convert-code"
+echo "                   /onboard /migrate-framework /error-monitor"
+echo "    Meta         : /write-skill /grill-me"
 echo ""
