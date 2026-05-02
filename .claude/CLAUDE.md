@@ -39,18 +39,6 @@ Language hints: !`ls package.json requirements.txt Pipfile pyproject.toml go.mod
 
 ---
 
-## gstack
-
-The `gstack` skills are vendored under `.claude/skills/gstack/`. **Use the `/browse` skill from gstack for all web browsing — never use `mcp__claude-in-chrome__*` tools.**
-
-Available gstack slash commands:
-
-`/office-hours`, `/plan-ceo-review`, `/plan-eng-review`, `/plan-design-review`, `/plan-devex-review`, `/design-consultation`, `/design-shotgun`, `/design-html`, `/design-review`, `/devex-review`, `/review`, `/ship`, `/land-and-deploy`, `/canary`, `/benchmark`, `/browse`, `/connect-chrome`, `/qa`, `/qa-only`, `/setup-browser-cookies`, `/setup-deploy`, `/setup-gbrain`, `/retro`, `/investigate`, `/document-release`, `/codex`, `/cso`, `/autoplan`, `/careful`, `/freeze`, `/guard`, `/unfreeze`, `/gstack-upgrade`, `/learn`
-
-If your team works in a shared project, add gstack to that project so teammates inherit it: copy `.claude/skills/gstack/` from this toolkit into the project's `.claude/skills/`, or add this toolkit as a git submodule.
-
----
-
 ## Project-Specific Configuration
 
 > **Customize this section per project**, or create `CLAUDE.local.md` for personal notes.

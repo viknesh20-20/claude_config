@@ -1,0 +1,108 @@
+{
+  "$schema_version": "1.0",
+  "_doc": "Declarative manifest read by install.mjs. archetype keys: web | saas | ai | all | custom | files-only. Edit this file to add/remove bundled items without touching the installer.",
+
+  "archetypes": {
+    "web": {
+      "label": "Premium Web / Landing Page",
+      "tagline": "$10K-tier sites, agencies, marketing sites, portfolios",
+      "secrets": ["FIGMA_ACCESS_TOKEN", "FIRECRAWL_API_KEY", "TWENTYFIRST_DEV_API_KEY"]
+    },
+    "saas": {
+      "label": "Enterprise SaaS App",
+      "tagline": "$100K-tier apps, dashboards, B2B products, multi-tenant",
+      "secrets": ["GITHUB_PERSONAL_ACCESS_TOKEN", "POSTGRES_CONNECTION_STRING", "MONGODB_URI", "REDIS_URL", "SUPABASE_URL", "SUPABASE_API_KEY", "STRIPE_SECRET_KEY", "SLACK_BOT_TOKEN", "SLACK_TEAM_ID", "SENTRY_ACCESS_TOKEN", "LINEAR_API_KEY", "CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID", "FIGMA_ACCESS_TOKEN", "TWENTYFIRST_DEV_API_KEY"]
+    },
+    "ai": {
+      "label": "AI Agent / RAG / LLM",
+      "tagline": "Autonomous agents, RAG pipelines, LLM apps, vector search",
+      "secrets": ["HF_TOKEN", "PERPLEXITY_API_KEY", "BRAVE_API_KEY", "FIRECRAWL_API_KEY", "QDRANT_URL", "QDRANT_API_KEY", "CHROMA_URL", "OPENAI_API_KEY", "ANTHROPIC_API_KEY"]
+    },
+    "all": {
+      "label": "Install Everything (kitchen sink)",
+      "tagline": "Every plugin, marketplace, agent collection, MCP",
+      "secrets": []
+    },
+    "custom": {
+      "label": "Custom (advanced, per-service)",
+      "tagline": "Granular yes/no for each item",
+      "secrets": []
+    },
+    "files-only": {
+      "label": "Files only (no plugins or MCPs)",
+      "tagline": "Skills, agents, rules, hooks, .mcp.json template — that's it",
+      "secrets": []
+    }
+  },
+
+  "marketplaces": [
+    { "slug": "claude-plugins-official", "auto": true, "license": "Anthropic ToS", "url": "https://claude.com/plugins" },
+    { "slug": "obra/superpowers-marketplace", "url": "https://github.com/obra/superpowers-marketplace", "license": "MIT" },
+    { "slug": "nextlevelbuilder/ui-ux-pro-max-skill", "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill", "license": "MIT" },
+    { "slug": "ruvnet/ruflo", "url": "https://github.com/ruvnet/ruflo", "license": "MIT" },
+    { "slug": "greensock/gsap-skills", "url": "https://github.com/greensock/gsap-skills", "license": "MIT" },
+    { "slug": "thedotmack/claude-mem", "url": "https://github.com/thedotmack/claude-mem", "license": "AGPL-3.0", "warn_before_install": true }
+  ],
+
+  "plugins": [
+    { "name": "frontend-design", "marketplace": "claude-plugins-official", "archetypes": ["web", "saas", "all"], "purpose": "Auto-activates on UI/frontend prompts. 299K+ installs." },
+    { "name": "superpowers", "marketplace": "obra/superpowers-marketplace", "archetypes": ["saas", "ai", "all"], "purpose": "Agentic methodology: TDD, brainstorming, parallel subagent dispatch, code review." },
+    { "name": "ui-ux-pro-max", "marketplace": "nextlevelbuilder/ui-ux-pro-max-skill", "archetypes": ["web", "saas", "all"], "purpose": "Design intelligence: 50+ styles, 161 palettes, 57 font pairs, accessibility checks." },
+    { "name": "claude-mem", "marketplace": "thedotmack/claude-mem", "archetypes": ["saas", "ai", "all"], "opt_in": true, "license_warning": "AGPL-3.0; ragtime/ subdir is PolyForm Noncommercial 1.0.0. Local dev-tool use is fine. Do NOT redistribute or embed in proprietary network-deployed software.", "purpose": "Persistent memory across sessions via 5 lifecycle hooks." },
+    { "name": "ruflo-core", "marketplace": "ruvnet/ruflo", "archetypes": ["ai", "saas", "all"], "purpose": "Foundation: server, health checks, plugin discovery." },
+    { "name": "ruflo-swarm", "marketplace": "ruvnet/ruflo", "archetypes": ["ai", "saas", "all"], "purpose": "Coordinate multiple agents as a team (hierarchical or mesh)." },
+    { "name": "ruflo-autopilot", "marketplace": "ruvnet/ruflo", "archetypes": ["ai", "all"], "purpose": "Autonomous /loop completion." },
+    { "name": "ruflo-federation", "marketplace": "ruvnet/ruflo", "archetypes": ["ai", "all"], "purpose": "Cross-machine agent federation." },
+    { "name": "ruflo-agentdb", "marketplace": "ruvnet/ruflo", "archetypes": ["ai", "all"], "purpose": "Agent state DB (19 controllers)." },
+    { "name": "ruflo-rag-memory", "marketplace": "ruvnet/ruflo", "archetypes": ["ai", "all"], "purpose": "RAG-backed long-term agent memory." },
+    { "name": "ruflo-knowledge-graph", "marketplace": "ruvnet/ruflo", "archetypes": ["ai", "all"], "purpose": "Entity/relationship graph for agent context." },
+    { "name": "ruflo-testgen", "marketplace": "ruvnet/ruflo", "archetypes": ["saas", "all"], "purpose": "Automated test generation." },
+    { "name": "ruflo-security-audit", "marketplace": "ruvnet/ruflo", "archetypes": ["saas", "all"], "purpose": "Continuous security audits." },
+    { "name": "ruflo-observability", "marketplace": "ruvnet/ruflo", "archetypes": ["saas", "all"], "purpose": "Tracing, logging, metrics for agents." }
+  ],
+
+  "skills_via_npx": [],
+  "_skills_via_npx_note": "All previously-listed npx-installable skills (impeccable, design-motion-principles, gsap-skills, webgpu-claude-skill, threejs-pkg) have been vendored under .claude/skills/. See vendored_skills above.",
+
+  "_clone_strategy_note": "All third-party content below is GITIGNORED — it never enters the user's repo. The installer git-clones each item locally on first run, into a path under .claude/agents/<vendor>/ or .claude/skills/<vendor>/, then strips the .git directory. Selection is interactive and archetype-filtered.",
+
+  "agent_collections": [
+    { "name": "voltagent", "repo": "https://github.com/VoltAgent/awesome-claude-code-subagents.git", "target": ".claude/agents/voltagent/", "method": "git_clone", "subset": "categories/", "archetypes": ["web", "saas", "ai", "all"], "license": "MIT", "approx_count": 150, "purpose": "100+ agents across 10 categories: core-development, language-specialists, infrastructure, quality-security, data-ai, developer-experience, specialized-domains, business-product, meta-orchestration, research-analysis." },
+    { "name": "wshobson", "repo": "https://github.com/wshobson/agents.git", "target": ".claude/agents/wshobson/", "method": "git_clone", "subset": "plugins/", "archetypes": ["saas", "ai", "all"], "license": "MIT", "approx_count": 185, "purpose": "Production-ready agents grouped by plugin: backend-development, kubernetes-operations, tdd-workflows, security-scanning, etc." },
+    { "name": "contains-studio", "repo": "https://github.com/contains-studio/agents.git", "target": ".claude/agents/contains-studio/", "method": "git_clone", "archetypes": ["web", "saas", "all"], "license": "UNLICENSED (no LICENSE in upstream repo)", "approx_count": 37, "requires_consent": true, "consent_warning": "Upstream repo has NO LICENSE file. Default copyright applies — that means redistribution is not authorized. Installing locally for personal use is generally fine; pushing the cloned content into a public repo is risky. Skip this unless you understand the implication.", "purpose": "Agents by department (design/engineering/marketing/product). Risk: missing license." }
+  ],
+
+  "vendored_skills": [
+    { "name": "gstack", "target": ".claude/skills/gstack/", "method": "git_clone", "repo": "https://github.com/garrytan/gstack.git", "license": "MIT", "post_install_note": "Run `cd .claude/skills/gstack && ./setup` for the full gstack runtime (browser binary, etc.).", "archetypes": ["saas", "all"] },
+    { "name": "superpowers", "target": ".claude/skills/superpowers/", "method": "git_clone", "subset": "skills/", "repo": "https://github.com/obra/superpowers.git", "license": "MIT", "archetypes": ["saas", "ai", "all"] },
+    { "name": "impeccable", "target": ".claude/skills/impeccable/", "method": "git_clone", "subset": ".claude/skills/impeccable/", "repo": "https://github.com/pbakaus/impeccable.git", "license": "Apache-2.0", "archetypes": ["web", "saas", "all"] },
+    { "name": "design-motion-principles", "target": ".claude/skills/design-motion-principles/", "method": "git_clone", "subset": "skills/design-motion-principles/", "repo": "https://github.com/kylezantos/design-motion-principles.git", "license": "MIT", "archetypes": ["web", "saas", "all"] },
+    { "name": "gsap", "target": ".claude/skills/gsap/", "method": "git_clone", "subset": "skills/", "repo": "https://github.com/greensock/gsap-skills.git", "license": "MIT", "archetypes": ["web", "saas", "all"] },
+    { "name": "ui-ux-pro-max", "target": ".claude/skills/ui-ux-pro-max/", "method": "git_clone", "subset": ".claude/skills/", "repo": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git", "license": "MIT", "archetypes": ["web", "saas", "all"] },
+    { "name": "webgpu-threejs", "target": ".claude/skills/webgpu-threejs/", "method": "git_clone", "subset": "skills/webgpu-threejs-tsl/", "repo": "https://github.com/dgreenheck/webgpu-claude-skill.git", "license": "MIT", "archetypes": ["web", "all"] },
+    { "name": "threejs-pkg", "target": ".claude/skills/threejs-pkg/", "method": "git_clone", "subset": "skills/source/", "repo": "https://github.com/OpenAEC-Foundation/Three.js-Claude-Skill-Package.git", "license": "MIT", "archetypes": ["web", "all"] }
+  ],
+
+  "mcps_via_cli": [
+    { "name": "magic", "scope": "user", "command_template": "claude mcp add magic --scope user --env API_KEY={{TWENTYFIRST_DEV_API_KEY}} -- npx -y @21st-dev/magic@latest", "archetypes": ["web", "saas", "all"], "secrets": ["TWENTYFIRST_DEV_API_KEY"], "license": "MIT (code); free tier API", "purpose": "21st.dev Magic — UI component generation via /ui or /21." }
+  ],
+
+  "external_clones": [],
+  "_external_clones_note": "gstack is vendored under .claude/skills/gstack/. See vendored_skills above. To get the full gstack runtime (browser binary, setup script), run the upstream installer: git clone https://github.com/garrytan/gstack.git ~/.claude/skills/gstack && cd ~/.claude/skills/gstack && ./setup",
+
+  "npm_suggestions": [
+    { "package": "motion", "archetypes": ["web", "all"], "purpose": "Motion.dev — modern animation library." },
+    { "package": "framer-motion", "archetypes": ["web", "all"], "purpose": "Framer Motion — React animation library." },
+    { "package": "gsap", "archetypes": ["web", "all"], "purpose": "GSAP — GreenSock Animation Platform." },
+    { "package": "three", "archetypes": ["web", "all"], "purpose": "Three.js — 3D engine for the web (used for 3D scroll-driven scenes)." },
+    { "package": "@react-three/fiber", "archetypes": ["web", "all"], "purpose": "React renderer for Three.js." },
+    { "package": "@react-three/drei", "archetypes": ["web", "all"], "purpose": "Useful helpers and abstractions for @react-three/fiber." },
+    { "package": "@react-three/postprocessing", "archetypes": ["web", "all"], "purpose": "Postprocessing effects (bloom, DOF, vignette) for r3f scenes." },
+    { "package": "lenis", "archetypes": ["web", "all"], "purpose": "Smooth scroll library — pairs with GSAP ScrollTrigger and r3f for 3D scroll effects." },
+    { "package": "leva", "archetypes": ["web", "all"], "purpose": "GUI controls for tuning 3D scenes during development." }
+  ],
+
+  "cli_bootstrap": [
+    { "name": "firecrawl-cli", "command": "npx -y firecrawl-cli@latest init --all --browser", "archetypes": ["web", "saas", "ai", "all"], "license": "MIT", "purpose": "Initialize Firecrawl CLI with browser session support. Reads FIRECRAWL_API_KEY from env when needed.", "secrets": ["FIRECRAWL_API_KEY"], "interactive": true }
+  ]
+}

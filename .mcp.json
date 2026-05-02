@@ -208,6 +208,165 @@
       "env": {
         "HF_TOKEN": "${HF_TOKEN}"
       }
+    },
+
+    "_comment_rag": "=== RAG & VECTOR DATABASES ===",
+
+    "claude-context": {
+      "command": "npx",
+      "args": ["-y", "@zilliz/claude-context-mcp"],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "MILVUS_URI": "${MILVUS_URI}",
+        "MILVUS_TOKEN": "${MILVUS_TOKEN}"
+      }
+    },
+    "qdrant": {
+      "command": "uvx",
+      "args": ["mcp-server-qdrant"],
+      "env": {
+        "QDRANT_URL": "${QDRANT_URL}",
+        "QDRANT_API_KEY": "${QDRANT_API_KEY}",
+        "COLLECTION_NAME": "${QDRANT_COLLECTION}"
+      }
+    },
+    "chroma": {
+      "command": "uvx",
+      "args": ["chroma-mcp"],
+      "env": {
+        "CHROMA_HOST": "${CHROMA_HOST}",
+        "CHROMA_PORT": "${CHROMA_PORT}"
+      }
+    },
+
+    "_comment_uigen": "=== UI COMPONENT GENERATION ===",
+
+    "magic": {
+      "command": "npx",
+      "args": ["-y", "@21st-dev/magic@latest"],
+      "env": {
+        "API_KEY": "${TWENTYFIRST_DEV_API_KEY}"
+      }
+    },
+
+    "_comment_deploy": "=== DEPLOYMENT PLATFORMS ===",
+
+    "vercel": {
+      "command": "npx",
+      "args": ["-y", "@vercel/mcp-adapter"],
+      "env": {
+        "VERCEL_TOKEN": "${VERCEL_TOKEN}"
+      }
+    },
+    "netlify": {
+      "command": "npx",
+      "args": ["-y", "@netlify/mcp"],
+      "env": {
+        "NETLIFY_AUTH_TOKEN": "${NETLIFY_AUTH_TOKEN}"
+      }
+    },
+
+    "_comment_cloud": "=== CLOUD PROVIDERS ===",
+
+    "aws": {
+      "command": "uvx",
+      "args": ["awslabs.aws-api-mcp-server@latest"],
+      "env": {
+        "AWS_ACCESS_KEY_ID": "${AWS_ACCESS_KEY_ID}",
+        "AWS_SECRET_ACCESS_KEY": "${AWS_SECRET_ACCESS_KEY}",
+        "AWS_REGION": "${AWS_REGION}"
+      }
+    },
+
+    "_comment_aisearch": "=== AI SEARCH & RESEARCH ===",
+
+    "tavily": {
+      "command": "npx",
+      "args": ["-y", "tavily-mcp"],
+      "env": {
+        "TAVILY_API_KEY": "${TAVILY_API_KEY}"
+      }
+    },
+    "exa": {
+      "command": "npx",
+      "args": ["-y", "exa-mcp-server"],
+      "env": {
+        "EXA_API_KEY": "${EXA_API_KEY}"
+      }
+    },
+
+    "_comment_aibrowser": "=== AI-NATIVE BROWSER AUTOMATION ===",
+
+    "browserbase": {
+      "command": "npx",
+      "args": ["-y", "@browserbasehq/mcp"],
+      "env": {
+        "BROWSERBASE_API_KEY": "${BROWSERBASE_API_KEY}",
+        "BROWSERBASE_PROJECT_ID": "${BROWSERBASE_PROJECT_ID}"
+      }
+    },
+
+    "_comment_aicompute": "=== AI COMPUTE & MODEL APIs ===",
+
+    "replicate": {
+      "command": "npx",
+      "args": ["-y", "replicate-mcp"],
+      "env": {
+        "REPLICATE_API_TOKEN": "${REPLICATE_API_TOKEN}"
+      }
+    },
+    "elevenlabs": {
+      "command": "uvx",
+      "args": ["elevenlabs-mcp"],
+      "env": {
+        "ELEVENLABS_API_KEY": "${ELEVENLABS_API_KEY}"
+      }
+    },
+    "e2b": {
+      "command": "npx",
+      "args": ["-y", "@e2b/mcp-server"],
+      "env": {
+        "E2B_API_KEY": "${E2B_API_KEY}"
+      }
+    },
+
+    "_comment_codequality": "=== CODE QUALITY & SECURITY ===",
+
+    "sonarqube": {
+      "command": "uvx",
+      "args": ["sonarqube-mcp"],
+      "env": {
+        "SONARQUBE_TOKEN": "${SONARQUBE_TOKEN}",
+        "SONARQUBE_ORG": "${SONARQUBE_ORG}",
+        "SONARQUBE_URL": "${SONARQUBE_URL}"
+      }
+    },
+    "snyk": {
+      "command": "npx",
+      "args": ["-y", "snyk", "mcp"],
+      "env": {
+        "SNYK_TOKEN": "${SNYK_TOKEN}"
+      }
+    },
+
+    "_comment_observability": "=== OBSERVABILITY ===",
+
+    "grafana": {
+      "command": "uvx",
+      "args": ["mcp-grafana"],
+      "env": {
+        "GRAFANA_URL": "${GRAFANA_URL}",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${GRAFANA_SERVICE_ACCOUNT_TOKEN}"
+      }
+    },
+    "datadog": {
+      "command": "uvx",
+      "args": ["datadog-mcp"],
+      "env": {
+        "DD_API_KEY": "${DD_API_KEY}",
+        "DD_APP_KEY": "${DD_APP_KEY}",
+        "DD_SITE": "${DD_SITE}"
+      }
     }
   }
 }

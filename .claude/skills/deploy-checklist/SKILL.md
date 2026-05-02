@@ -79,6 +79,24 @@ Go through each section. Mark items as PASS, FAIL, WARN, or N/A.
 - [ ] Feature flags can disable new features without rollback
 - [ ] Previous version is tagged and accessible
 
+### 10. Web Compliance & SEO (skip ONLY if not a public website)
+- [ ] Privacy Policy live at `/privacy` and linked in footer
+- [ ] Terms of Service live at `/terms` and linked in footer (if signup/payments)
+- [ ] Cookie Policy + cookie consent banner present (if any non-essential cookies)
+- [ ] No tracking scripts load before user consent
+- [ ] `sitemap.xml` accessible at site root and lists all canonical URLs
+- [ ] `robots.txt` accessible at site root with sitemap reference
+- [ ] Production environment NOT disallowed in `robots.txt` (common deploy bug)
+- [ ] Every page has unique `<title>` and `<meta description>`
+- [ ] Every page has canonical URL, Open Graph tags, Twitter Card tags
+- [ ] 404 page returns HTTP 404 (not 200)
+- [ ] HTTPS-only with HSTS header
+- [ ] WCAG 2.1 AA verified (contrast, keyboard, focus, alt text)
+- [ ] Core Web Vitals within budget (LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1)
+- [ ] If applicable: GDPR/CCPA "Do Not Sell" link, DSAR endpoint, consent records retained
+
+If any item in this section fails, run `/web-launch-check` for a structured audit and `/legal-pages` or `/seo-scaffold` to generate the missing pieces.
+
 ---
 
 ## Output

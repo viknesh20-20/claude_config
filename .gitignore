@@ -33,3 +33,30 @@ node_modules/
 
 # Logs
 *.log
+
+# ============================================================================
+# Third-party vendored content — fetched by install.mjs at install time.
+# Never committed to this repo. Each vendor folder has a NOTICE.md attributing
+# the upstream source + license; the installer re-clones on demand.
+# ============================================================================
+
+# Agent collections (cloned by install.mjs based on archetype selection)
+.claude/agents/voltagent/
+.claude/agents/wshobson/
+.claude/agents/contains-studio/
+
+# Skill packs (cloned by install.mjs based on archetype selection)
+.claude/skills/gstack/
+.claude/skills/superpowers/
+.claude/skills/impeccable/
+.claude/skills/design-motion-principles/
+.claude/skills/gsap/
+.claude/skills/ui-ux-pro-max/
+.claude/skills/webgpu-threejs/
+.claude/skills/threejs-pkg/
+
+# Temp clones used by installer
+/tmp-clones/
+
+# Personal setup notes — kept local, never published
+docs/REPO_SETUP.md

@@ -1,13 +1,47 @@
-# Claude Code Toolkit
+# Claude Code Toolkit — Skills, Agents, Plugins, MCP Servers, Rules & Hooks for AI-assisted development
 
-### The ultimate Claude Code configuration — 30 skills, 30 MCP servers, 8 agents, 9 rules, safety hooks. Production-ready, stack-agnostic, endlessly upgradable.
+> **The complete production-ready Claude Code configuration.** A one-command installer that gives you 200+ slash commands, ~390 specialized agents, 45+ MCP servers, 14 plugins, design tools, 3D / WebGPU stack, RAG & vector databases, AI agent orchestration, testing, DevOps, and security tooling. Free, open-source, MIT-licensed. Works for vibe coders and senior engineers alike.
 
-**30 skills, 8 agents, 9 rules, safety hooks, and 30 MCP servers** — everything you need to supercharge Claude Code in any project, any language, any framework.
+**Use cases:** premium landing pages · enterprise SaaS apps · AI agents · RAG pipelines · LLM applications · design systems · scroll-driven 3D websites · autonomous swarms · testing automation · security audits · CI/CD setup.
 
-[![Skills](https://img.shields.io/badge/skills-30-blue?style=flat-square)](CATALOG.md)
-[![Agents](https://img.shields.io/badge/agents-8-purple?style=flat-square)](CATALOG.md)
+<!--
+SEO keywords (do not remove): Claude Code, Claude Code skills, Claude Code agents, Claude Code subagents, Claude Code plugins, Claude Code MCP, Claude Code marketplace, Anthropic Claude AI development, Claude AI toolkit, AI coding assistant configuration, agent orchestration, RAG MCP, vector database MCP, Three.js Claude skill, WebGPU Claude skill, GSAP skills Claude, design system AI, frontend AI assistant, ui-ux-pro-max, gstack, ruflo, superpowers, impeccable design skill, claude-mem, voltagent agents, wshobson agents, contains-studio agents, AI engineer agent, security auditor agent, devops agent, TDD agent, code reviewer agent, architect agent, qa lead agent, design system architect agent, three-d-specialist agent.
+-->
+
+**Quick links:** [CHEATSHEET.md](CHEATSHEET.md) · [docs/FIRST_RUN.md](docs/FIRST_RUN.md) (new to this? start here) · [docs/MEMORY.md](docs/MEMORY.md) · [docs/TOOLBOX.md](docs/TOOLBOX.md) · [docs/ARCHETYPES.md](docs/ARCHETYPES.md) · [docs/LICENSES.md](docs/LICENSES.md) · [CATALOG.md](CATALOG.md)
+
+---
+
+## At a glance
+
+What you get out-of-the-box (all original, MIT-licensed, in-repo):
+
+- **12 specialist agents** written from scratch — `architect`, `code-reviewer`, `security-auditor`, `devops`, `performance`, `tdd`, `documentation`, `mentor`, plus new originals: `three-d-specialist`, `ai-engineer`, `design-system-architect`, `qa-lead`.
+- **30 baseline slash-command skills** — `/review-pr`, `/security-scan`, `/optimize`, `/tdd`, `/onboard`, `/debug`, `/refactor`, `/explain-code`, `/architecture-review`, `/api-design`, `/ci-pipeline`, `/docker-setup`, `/db-migration`, `/deploy-checklist`, `/write-tests`, `/code-coverage`, `/dependency-audit`, `/changelog`, `/pr-summary`, `/fix-issue`, `/estimate`, `/generate-docs`, `/migrate-framework`, `/error-monitor`, `/env-setup`, `/create-component`, `/git-cleanup`, `/grill-me`, `/write-skill`, `/convert-code`.
+- **12 auto-loading coding rules** for security, testing, code quality, performance, error handling, git workflow, API design, database, documentation, **web compliance & SEO** (privacy, cookies, sessions, GDPR/CCPA, sitemap, WCAG), **no-hallucination** (verify before claiming, ask before deciding), **memory-discipline** (persistent context across sessions).
+- **Persistent memory layer** at `.claude/memory/` — facts about the project, user preferences, corrections, and references survive across sessions. Inherit memories from another workspace via `/memory-import`. Use a fully-built application as a reference via `/reference-app`. End-of-session summaries via `/handoff` so tomorrow's session picks up cleanly.
+- **2 safety hooks** that block dangerous operations before they execute.
+- **45+ MCP servers** wired up via `.mcp.json` (with `${ENV}` placeholders — no secrets committed).
+- **Cross-platform Node.js installer** that asks one friendly question and sets everything up.
+
+What the installer can fetch on demand (open-source, gitignored, never published with your repo):
+
+- **~150 VoltAgent agents** in 10 domains.
+- **~185 wshobson agents** grouped by plugin.
+- **~38 gstack skills** (Garry Tan's stack: `/office-hours`, `/ship`, `/review`, `/qa`, `/canary`, `/design-review`, etc.).
+- **14 superpowers skills** — TDD, brainstorming, parallel subagents, code review.
+- **24 Three.js skills** — WebGL, WebGPU, R3F, drei, physics.
+- **8 GSAP skills** — core, timeline, ScrollTrigger, plugins, React, performance.
+- **23 impeccable commands** — design fluency: polish, audit, critique, typeset, animate.
+- **WebGPU + TSL skill**, **design-motion-principles**, **ui-ux-pro-max**.
+- **Claude Code plugins**: frontend-design, superpowers, ui-ux-pro-max, ruflo (10 plugins), claude-mem (opt-in).
+
+[![Slash commands](https://img.shields.io/badge/slash--commands-200%2B-blue?style=flat-square)](CHEATSHEET.md)
+[![Agents](https://img.shields.io/badge/agents-12_original_%2B_~370_optional-purple?style=flat-square)](docs/ARCHETYPES.md)
+[![Vendored](https://img.shields.io/badge/vendored--in--repo-yes-green?style=flat-square)](docs/LICENSES.md)
+[![MCP Servers](https://img.shields.io/badge/MCP_servers-45%2B-orange?style=flat-square)](.mcp.json)
+[![Plugins](https://img.shields.io/badge/native_plugins-13-red?style=flat-square)](.claude/plugins.json)
 [![Rules](https://img.shields.io/badge/rules-9-green?style=flat-square)](CATALOG.md)
-[![MCP Servers](https://img.shields.io/badge/MCP_servers-30-orange?style=flat-square)](.mcp.json)
 [![Stack](https://img.shields.io/badge/stack-agnostic-brightgreen?style=flat-square)](#design-philosophy)
 [![Platform](https://img.shields.io/badge/platform-win%20%7C%20mac%20%7C%20linux-lightgrey?style=flat-square)](#quick-start)
 [![License](https://img.shields.io/badge/license-MIT-yellow?style=flat-square)](LICENSE)
@@ -50,46 +84,100 @@ All of it is **stack-agnostic** — skills auto-detect your project's language, 
 
 ## Quick Start
 
-### Option A: Interactive install (recommended)
+### Option A: Node.js installer — RECOMMENDED
+
+Cross-platform. Asks one question — *what are you building?* — then installs the matching bundle (plugins, skills, agents, MCPs, secrets).
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/claude-code-toolkit.git ~/claude-code-toolkit
+cd /path/to/your/project
+node ~/claude-code-toolkit/install.mjs
 
-# Interactive installer — walks you through API keys & secrets
-bash ~/claude-code-toolkit/install.sh /path/to/your/project
-
-# Start Claude Code — everything is ready
-cd /path/to/your/project && claude
+# Or skip the menu and install everything:
+node ~/claude-code-toolkit/install.mjs --all
 ```
 
-The interactive installer:
-- Installs all skills, agents, rules, hooks, and MCP servers
-- Walks you through each MCP server's API keys/secrets one by one
-- Lets you **skip** any service you don't use
-- Saves secrets to `.env.local` (gitignored) or your shell profile
-- Shows a summary of configured vs skipped services
+**Windows:**
 
-### Option B: Quick install (no prompts)
+```powershell
+.\bootstrap.ps1
+```
+
+**macOS / Linux:**
 
 ```bash
-# Copies everything with no secret configuration
-bash ~/claude-code-toolkit/setup.sh /path/to/your/project
+bash bootstrap.sh
 ```
 
-### Option C: Use as a Git submodule
+What it does:
+1. Detects toolchain (node, git, npx, claude, uvx).
+2. Asks for an **archetype** (web · saas · ai · all · custom · files-only).
+3. Copies skills, agents, rules, hooks, `.mcp.json`, `settings.json`.
+4. Adds plugin marketplaces (`claude plugin marketplace add ...`).
+5. Installs Claude Code plugins (`claude plugin install ...`).
+6. Installs npx skills (impeccable, gsap, motion-principles).
+7. Clones agent collections (VoltAgent, wshobson, contains-studio).
+8. Adds per-archetype MCP servers (`claude mcp add ...`).
+9. Prompts for archetype-relevant API keys; saves to `.env.local`.
+10. Regenerates `docs/LICENSES.md` from manifest.
+
+Idempotent — re-run it any time. Already-installed items are skipped.
+
+### Option B: Legacy bash installer
+
+```bash
+bash ~/claude-code-toolkit/install.sh /path/to/your/project
+```
+
+Per-service yes/no prompts; no plugin marketplace integration. Use this if you can't run Node.
+
+### Option C: Quick install (file-only, no prompts)
+
+```bash
+bash ~/claude-code-toolkit/setup.sh /path/to/your/project
+# or
+node ~/claude-code-toolkit/install.mjs --archetype files-only
+```
+
+### Option D: Git submodule
 
 ```bash
 cd your-project
 git submodule add https://github.com/YOUR_USERNAME/claude-code-toolkit.git claude-code-toolkit
-bash claude-code-toolkit/install.sh .
+node claude-code-toolkit/install.mjs --target .
 git add . && git commit -m "chore: add claude-code-toolkit"
 ```
 
-### Option D: Cherry-pick what you need
+After setup, customize `CLAUDE.md` with your project's stack and conventions, then open [CHEATSHEET.md](CHEATSHEET.md) for the intent → command lookup.
 
-Copy individual skill/agent/rule files into your project's `.claude/` directory.
+---
 
-After setup, **customize `CLAUDE.md`** with your project's stack, commands, and architecture.
+## Archetypes
+
+The installer asks one question: *what are you building?* Six answers, six bundles.
+
+| Archetype | For | Key adds |
+|---|---|---|
+| **web** | $10K-tier sites, agencies, marketing | impeccable · ui-ux-pro-max · 21st-dev/magic · frontend-design · gsap-skills · motion-principles · figma + playwright MCP |
+| **saas** | $100K-tier B2B / SaaS | everything from `web` + superpowers + ruflo (core, swarm, testgen, security-audit, observability) + gstack + claude-context + DB/payments/comms/monitoring MCPs |
+| **ai** | Autonomous agents, RAG, LLM apps | full ruflo (core, swarm, autopilot, federation, agentdb, rag-memory, knowledge-graph) + superpowers + qdrant + chroma + claude-context + huggingface + perplexity + firecrawl |
+| **all** | Solo founders, "kitchen sink" | Union of `web` + `saas` + `ai` |
+| **custom** | Power users | Granular per-service prompts |
+| **files-only** | Skeptics, offline | Just the toolkit's skills/agents/rules/hooks |
+
+See [docs/ARCHETYPES.md](docs/ARCHETYPES.md) for what each one installs in detail.
+
+---
+
+## What this can build
+
+| Tier | Use the toolkit to ship | Provided by |
+|---|---|---|
+| **Premium websites ($10K+)** | Animated landing pages, design-forward marketing sites, portfolios | impeccable, ui-ux-pro-max, 21st-dev/magic, gsap-skills, motion-principles, frontend-design, figma + playwright MCP |
+| **Enterprise SaaS ($100K+)** | Multi-tenant dashboards, B2B products, billing flows, complex backends | superpowers, ruflo, gstack, claude-mem (opt-in), claude-context (RAG over codebase), full DB/payments/monitoring stack, 190+ specialized agents |
+| **AI agents / RAG / LLM apps** | Autonomous swarms, vector-search apps, research bots, agentic pipelines | full ruflo plugin set, qdrant + chroma MCPs, claude-context, huggingface, perplexity, tavily, exa, browserbase, e2b, replicate, elevenlabs, sequential-thinking, 150+ AI/data agents |
+
+For the comprehensive register of every tool the toolkit can drive — design references, brainstorming whiteboards (15 ranked free-first), Three.js / WebGPU / WebGL stack, testing, DevOps, AI MCPs — see [docs/TOOLBOX.md](docs/TOOLBOX.md).
 
 ---
 
@@ -511,4 +599,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding skills, agents, 
 
 ## License
 
-[MIT](LICENSE) — use freely in personal and commercial projects.
+[MIT](LICENSE) — this toolkit (the 12 agents, 30 skills, 9 rules, 2 hooks, installer, docs) is MIT-licensed and is yours to push, fork, modify, and ship.
+
+**Third-party content is never committed to this repo.** The installer fetches it on demand into gitignored paths. Each fetched folder gets a `NOTICE.md` with attribution. You can publish your repo without redistributing third-party code.
+
+The full per-source license register is at [docs/LICENSES.md](docs/LICENSES.md). One source (`contains-studio`) has no LICENSE upstream — the installer requires explicit consent before fetching it and defaults to "no."
