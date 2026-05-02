@@ -79,6 +79,21 @@
 | `/reference-app <path>` | Analyze a fully-built reference application; store its architecture + conventions in `reference/` for cross-comparison |
 | `/handoff` | End-of-session summary written to `handoffs/<date>.md` so the next session resumes cleanly |
 
+### Business Logic (SaaS / ERP / e-commerce / full-stack)
+| Command | Description |
+|---------|-------------|
+| `/business-blueprint` | Walks every domain (auth, billing, multi-tenancy, inventory, GL, audit, compliance) tailored to project type + stage. Outputs a prioritized build plan. |
+| `/business-logic-audit` | Severity-graded review of existing business code for invariant violations, race conditions, missing idempotency, currency precision, audit gaps |
+| `/competitive-analysis` | Researches how 2–4 mature competitors (Stripe / Linear / NetSuite / Shopify / Auth0 / etc.) solve a specific problem. Side-by-side comparison, cites every source. |
+
+### Design (flows, wireframes, copy, accessibility)
+| Command | Description |
+|---------|-------------|
+| `/design-flow` | Designs an end-to-end user flow before pixels: entry, screens, decisions, branches, edge cases, microcopy hooks. Outputs an engineering-ready spec. |
+| `/wireframe` | Pixel-free wireframes (ASCII / Mermaid / outline) for any screen, covering all states (default, loading, empty, error) |
+| `/microcopy` | Voice-consistent UX copy for buttons, errors, empty states, success, tooltips, forms. No "Submit" / "Oops!" / dark patterns. |
+| `/a11y-audit` | WCAG 2.1 AA audit with code fixes per finding. Walks every criterion that maps to common patterns. |
+
 ### Meta
 | Command | Description |
 |---------|-------------|
@@ -105,6 +120,8 @@ These are written from scratch for this toolkit. Original IP, no copy-paste from
 | `ai-engineer` | LLM apps, RAG, agentic systems, evals, prompt caching, cost tuning | Any feature that calls an LLM |
 | `design-system-architect` | Tokens, component APIs, theming, a11y at the component layer | Building or auditing a design system |
 | `qa-lead` | Test pyramid, E2E, visual regression, a11y, perf budgets, flake hunting | Test strategy, CI gates, release smoke |
+| `business-architect` | Senior business-domain architect for SaaS/ERP/e-commerce/marketplace/fintech. Knows Stripe, Linear, NetSuite, Shopify patterns; thinks in invariants and failure modes. | Designing or reviewing money, multi-tenancy, state machines, audit, billing, refunds, RBAC |
+| `ux-designer` | Senior product designer for user flows, IA, wireframes, microcopy, UX review. Owns the user's path through the product. Refuses dark patterns. | Designing flows, reviewing UX, writing microcopy, planning IA |
 
 ## Agents — Vendored from third-party sources (376)
 
@@ -134,17 +151,20 @@ Physically present in the repo under `.claude/agents/<vendor>/` with `NOTICE.md`
 | `web-compliance.md` | Privacy, cookies, sessions, GDPR/CCPA, sitemap, robots.txt, SEO meta, WCAG, legal pages |
 | `no-hallucination.md` | Verify before claiming. Ask before deciding on destructive / visible / ambiguous / costly / locking actions. |
 | `memory-discipline.md` | Read `.claude/memory/MEMORY.md` at session start; write deliberately; never duplicate; redact secrets. |
+| `business-logic.md` | Cents-as-int for money. UTC + DST-aware time. Append-only ledger. Explicit state-machine transitions. Multi-tenant isolation. Idempotency on every state change. Append-only audit on regulated entities. |
+| `design-quality.md` | Four pillars (hierarchy, consistency, feedback, accessibility). 4-pt spacing scale, modular type scale, WCAG AA contrast, semantic HTML, focus visibility, motion principles, microcopy rules. Refuses dark patterns. |
 
 Rules auto-load into every Claude Code session. No manual invocation needed.
 
 ---
 
-## Hooks (2)
+## Hooks (3)
 
 | Hook | Trigger | Behavior |
 |------|---------|----------|
 | `pre-tool-use.sh` | Before every tool call | Blocks dangerous ops (rm -rf, force push, .env writes) |
 | `post-tool-use.sh` | After every tool call | Extensible passthrough (auto-lint, logging examples) |
+| `design-quality-check.sh` | After Edit/Write to UI files (.tsx/.jsx/.vue/.svelte/.html/.astro) | Non-blocking nudge: flags raw hex colors, off-scale pixels, missing alt, empty buttons, `outline:none` without focus-visible, `<div onClick>` |
 
 ---
 
