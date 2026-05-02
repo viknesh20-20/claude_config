@@ -1,0 +1,88 @@
+{
+  "name": "claude-code-toolkit",
+  "version": "1.0.0",
+  "description": "Production-ready Claude Code configuration. 12 original agents, 200+ slash-command skills, 45+ MCP servers, 14 plugins, design + 3D + WebGPU + GSAP + RAG tooling, persistent cross-session memory, web compliance & SEO. One-command Node.js installer for premium websites, SaaS apps, AI agents.",
+  "keywords": [
+    "claude-code",
+    "claude-ai",
+    "anthropic-claude",
+    "ai-agents",
+    "ai-coding-assistant",
+    "mcp-servers",
+    "claude-skills",
+    "claude-plugins",
+    "claude-code-skills",
+    "claude-code-agents",
+    "claude-subagents",
+    "agent-orchestration",
+    "rag",
+    "llm-tools",
+    "ai-development-toolkit",
+    "prompt-engineering",
+    "threejs",
+    "webgpu",
+    "gsap",
+    "design-system",
+    "devops-toolkit",
+    "seo-toolkit",
+    "web-compliance",
+    "gdpr",
+    "persistent-memory"
+  ],
+  "homepage": "https://github.com/viknesh20-20/claude-code-tool-kit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viknesh20-20/claude-code-tool-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/viknesh20-20/claude-code-tool-kit/issues"
+  },
+  "author": "viknesh20-20",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "bin": {
+    "claude-code-toolkit": "./install.mjs",
+    "cct": "./install.mjs",
+    "cct-update": "./update.mjs"
+  },
+  "scripts": {
+    "install:project": "node install.mjs",
+    "update": "node update.mjs",
+    "setup:files-only": "node install.mjs --archetype files-only",
+    "setup:web": "node install.mjs --archetype web",
+    "setup:saas": "node install.mjs --archetype saas",
+    "setup:ai": "node install.mjs --archetype ai",
+    "setup:all": "node install.mjs --all"
+  },
+  "files": [
+    "install.mjs",
+    "update.mjs",
+    "bootstrap.ps1",
+    "bootstrap.sh",
+    ".claude/agents/**/*.md",
+    ".claude/skills/**/*.md",
+    ".claude/skills/**/SKILL.md",
+    ".claude/skills/**/scripts/**",
+    ".claude/skills/**/references/**",
+    ".claude/skills/**/reference/**",
+    ".claude/skills/**/templates/**",
+    ".claude/skills/**/examples/**",
+    ".claude/skills/**/docs/**",
+    ".claude/rules/*.md",
+    ".claude/hooks/*.sh",
+    ".claude/settings.json",
+    ".claude/plugins.json",
+    ".claude/memory/README.md",
+    ".claude/memory/MEMORY.md",
+    ".mcp.json",
+    "CLAUDE.md",
+    "CHEATSHEET.md",
+    "CATALOG.md",
+    "README.md",
+    "LICENSE",
+    "docs/*.md"
+  ]
+}

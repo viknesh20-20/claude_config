@@ -4,7 +4,7 @@ set -euo pipefail
 # ============================================================================
 # Claude Code Toolkit — Setup Script
 # Wires this config into a target project directory.
-# Usage: bash claude-code-toolkit/setup.sh [target-project-path]
+# Usage: bash claude-code-tool-kit/setup.sh [target-project-path]
 # Works on: Linux, macOS, Windows (Git Bash / MSYS2 / WSL)
 # ============================================================================
 

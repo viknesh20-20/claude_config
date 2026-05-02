@@ -4,7 +4,7 @@ set -euo pipefail
 # ============================================================================
 # Claude Code Toolkit — Interactive Installer
 # Full setup with optional API key/secret configuration per MCP server.
-# Usage: bash claude-code-toolkit/install.sh [target-project-path]
+# Usage: bash claude-code-tool-kit/install.sh [target-project-path]
 # Works on: Linux, macOS, Windows (Git Bash / MSYS2 / WSL)
 # ============================================================================
 

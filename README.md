@@ -82,73 +82,73 @@ All of it is **stack-agnostic** — skills auto-detect your project's language, 
 
 ---
 
-## Quick Start
-
-### Option A: Node.js installer — RECOMMENDED
-
-Cross-platform. Asks one question — *what are you building?* — then installs the matching bundle (plugins, skills, agents, MCPs, secrets).
-
-```bash
-git clone https://github.com/YOUR_USERNAME/claude-code-toolkit.git ~/claude-code-toolkit
-cd /path/to/your/project
-node ~/claude-code-toolkit/install.mjs
-
-# Or skip the menu and install everything:
-node ~/claude-code-toolkit/install.mjs --all
-```
-
-**Windows:**
-
-```powershell
-.\bootstrap.ps1
-```
-
-**macOS / Linux:**
-
-```bash
-bash bootstrap.sh
-```
-
-What it does:
-1. Detects toolchain (node, git, npx, claude, uvx).
-2. Asks for an **archetype** (web · saas · ai · all · custom · files-only).
-3. Copies skills, agents, rules, hooks, `.mcp.json`, `settings.json`.
-4. Adds plugin marketplaces (`claude plugin marketplace add ...`).
-5. Installs Claude Code plugins (`claude plugin install ...`).
-6. Installs npx skills (impeccable, gsap, motion-principles).
-7. Clones agent collections (VoltAgent, wshobson, contains-studio).
-8. Adds per-archetype MCP servers (`claude mcp add ...`).
-9. Prompts for archetype-relevant API keys; saves to `.env.local`.
-10. Regenerates `docs/LICENSES.md` from manifest.
-
-Idempotent — re-run it any time. Already-installed items are skipped.
-
-### Option B: Legacy bash installer
-
-```bash
-bash ~/claude-code-toolkit/install.sh /path/to/your/project
-```
-
-Per-service yes/no prompts; no plugin marketplace integration. Use this if you can't run Node.
-
-### Option C: Quick install (file-only, no prompts)
-
-```bash
-bash ~/claude-code-toolkit/setup.sh /path/to/your/project
-# or
-node ~/claude-code-toolkit/install.mjs --archetype files-only
-```
-
-### Option D: Git submodule
+## Quick Start — one command
 
 ```bash
 cd your-project
-git submodule add https://github.com/YOUR_USERNAME/claude-code-toolkit.git claude-code-toolkit
+npx github:viknesh20-20/claude-code-tool-kit
+```
+
+That's it. The installer asks one question — *what are you building?* — and sets up the matching bundle (plugins, skills, agents, MCPs, secrets) inside the current directory.
+
+To install everything without picking:
+
+```bash
+npx github:viknesh20-20/claude-code-tool-kit --all
+```
+
+**Windows PowerShell** works the same way:
+
+```powershell
+cd your-project
+npx github:viknesh20-20/claude-code-tool-kit
+```
+
+That's the recommended path. Everything else below is alternatives for specific situations.
+
+---
+
+### Alternative: clone + run
+
+If you'd rather have the toolkit on disk (so you can update it yourself):
+
+```bash
+git clone https://github.com/viknesh20-20/claude-code-tool-kit.git ~/claude-code-toolkit
+cd /path/to/your/project
+node ~/claude-code-toolkit/install.mjs
+```
+
+### Alternative: file-only quick install
+
+No archetypes, no prompts, no plugins — just the core skills, agents, rules, hooks:
+
+```bash
+npx github:viknesh20-20/claude-code-tool-kit --archetype files-only
+```
+
+### Alternative: git submodule (for teams)
+
+```bash
+cd your-project
+git submodule add https://github.com/viknesh20-20/claude-code-tool-kit.git claude-code-toolkit
 node claude-code-toolkit/install.mjs --target .
 git add . && git commit -m "chore: add claude-code-toolkit"
 ```
 
-After setup, customize `CLAUDE.md` with your project's stack and conventions, then open [CHEATSHEET.md](CHEATSHEET.md) for the intent → command lookup.
+### What the installer does
+
+1. Detects your toolchain (Node, git, npx, Claude Code, uvx) and tells you what's missing with install links.
+2. Asks for an **archetype** (web · saas · ai · all · custom · files-only) — friendly question with examples.
+3. Copies skills, agents, rules, hooks, `.mcp.json`, `settings.json` into your project.
+4. Adds plugin marketplaces and installs Claude Code plugins matching the archetype.
+5. Clones agent collections (VoltAgent, wshobson, optionally contains-studio with consent) into gitignored paths.
+6. Adds per-archetype MCP servers and prompts for any API keys you have (skip any to add later).
+7. Initializes the persistent memory layer at `.claude/memory/`.
+8. Generates a license register (`docs/LICENSES.md`) reflecting what was installed.
+
+Re-running the installer is safe — already-installed items are skipped.
+
+After setup, customize `CLAUDE.md` with your project's stack, then open [CHEATSHEET.md](CHEATSHEET.md) for the intent → command lookup.
 
 ---
 
@@ -544,7 +544,7 @@ New skills, agents, and rules are added automatically. Your project-level custom
 
 ```bash
 # Add to project
-git submodule add https://github.com/YOUR_USERNAME/claude-code-toolkit.git claude-code-toolkit
+git submodule add https://github.com/viknesh20-20/claude-code-tool-kit.git claude-code-toolkit
 bash claude-code-toolkit/setup.sh .
 git add .gitmodules claude-code-toolkit .claude/ CLAUDE.md .mcp.json .gitignore
 git commit -m "chore: add claude-code-toolkit submodule"
